@@ -1,6 +1,8 @@
-# Lab Exercises
+# Lab Exercises - EX260 Certification Track
 
-Do these in order. Document everything you do (commands, outputs, issues).
+Do these in order. Document everything you do (commands, outputs, issues). After each lab, reboot the nodes and re-verify - persistence is graded on EX260.
+
+**Certification alignment**: Labs 1-10 cover most EX260 objectives. Labs 11-14 cover installation, CRUSH, RBD mirroring, and OpenStack integration. See [certification/CERTIFICATION_PATH.md](../certification/CERTIFICATION_PATH.md) for the full objective mapping and [certification/MOCK_EXAMS.md](../certification/MOCK_EXAMS.md) for timed practice.
 
 ## Lab 1: Cluster Basics
 **Goal**: Verify cluster health and explore
@@ -114,3 +116,45 @@ Do these in order. Document everything you do (commands, outputs, issues).
 - [ ] Verify data
 - [ ] Clean up
 - **Notes**: Document backup strategy
+
+## Lab 11: Install a Cluster from Scratch (EX260)
+**Goal**: Reproduce the install objective under time pressure
+
+- [ ] Provision 3 VMs (MON/MGR) and 3 OSD VMs with extra disks
+- [ ] Bootstrap with `cephadm` or the Red Hat Ansible installer
+- [ ] Add hosts, MONs, MGRs, and OSDs
+- [ ] Set public and cluster networks
+- [ ] Reboot and verify the cluster returns to `HEALTH_OK`
+- **Notes**: Time yourself; aim for under 90 minutes
+
+## Lab 12: CRUSH Maps and PG Remapping (EX260)
+**Goal**: Control data placement
+
+- [ ] Create a bucket hierarchy (`datacenter -> rack -> host`)
+- [ ] Create a replicated rule and an erasure-code profile using it
+- [ ] Create a pool pinned to the rule
+- [ ] Remap one PG and observe movement
+- [ ] Remap all PGs in the pool and watch redistribution
+- [ ] Verify with `ceph osd crush rule dump` and `ceph pg dump`
+- **Notes**: Explain each step in your own words
+
+## Lab 13: RBD Mirroring and Import/Export (EX260)
+**Goal**: Cover block storage objectives
+
+- [ ] Create two clusters (or two pools with mirroring enabled)
+- [ ] Deploy the RBD mirror agent
+- [ ] Configure one-way image-mode mirroring
+- [ ] Configure pool-mode mirroring
+- [ ] Confirm `up+replaying` status
+- [ ] Export a full image, create an incremental export, import both
+- **Notes**: Document the exact commands and validation output
+
+## Lab 14: OpenStack Glance and Cinder Integration (EX260)
+**Goal**: Cover the integration objective
+
+- [ ] Create the `images` and `volumes` pools and CephX users
+- [ ] Configure Glance to use RBD as the image backend
+- [ ] Configure Cinder to use RBD as the volume backend
+- [ ] Create an image and a volume, then verify they exist in Ceph
+- [ ] Document required `ceph.conf` settings on the OpenStack nodes
+- **Notes**: If OpenStack is unavailable, document the config and validate with `rbd` commands
